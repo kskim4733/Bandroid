@@ -20,7 +20,8 @@ var io = require('socket.io')(server);
 //   socket.emit('news', 'MSG FROM PROF serverTEST ');
 // });
 //-------------------------prof db database intializing------------------------------------------------------------------------------
-var profdb_url = 'mongodb://localhost:27017/profDB';  //we will have two db one for prof's msg and one for user
+// var profdb_url = 'mongodb://localhost:27017/profDB';  //we will have two db one for prof's msg and one for user
+var profdb_url = 'mongodb://kskim4733:kylekim1234@ds127436.mlab.com:27436/bandroid';  //we will have two db one for prof's msg and one for use
 var userdb_url = 'mongodb://localhost:27017/userDB';
 
 MongoClient.connect(profdb_url, function(err, db) {

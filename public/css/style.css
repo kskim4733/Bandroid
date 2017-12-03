@@ -85,3 +85,19 @@ body {
 footer{
   margin-top:40px;
 }
+#banner{
+  padding-top: 70px;
+}
+#bandroid_navbar{
+  text-align: center;
+  padding-right: 10px;
+}
+#bandroid_logo_text{
+  text-align: center;
+  font-size: 40px;
+}
+#logo_img {
+    display: block;
+    margin: auto;
+    width: 40%;
+}

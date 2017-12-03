@@ -1,4 +1,71 @@
- <h2 class="page-header">Home</h2>
-<p>Welcome to your dashboard</p>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>BanDroid</title>
+	<link rel="stylesheet" href="/css/bootstrap.css" />
+	<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<div class ="d-flex flex-row justify-content-center" id = "banner">
+	<div>
+		<img src="./data/circle_ver.png" alt="BanDroid" id ="logo_img" class="img-responsive">
+		 <h2 class="page-header">Bandroid Dashboard</h2>
+	</div>
+</div>
+	<div class = "container-fluid">
+		<nav class="navbar fixed-top navbar-dark bg-dark navbar-expand-md">
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
 
-{{!-- Can add extra stuff here --}}
+		  <div class="collapse navbar-collapse" id="navbarNav">
+		    <ul class="navbar-nav nav nav-pills">
+		      <li class="nav-item active">
+		        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+		      </li>
+		       <li class="nav-item active">
+		        <a class="nav-link" href="/dashboard">My Account</a>
+		      </li>
+		    </ul>
+		    <ul class="navbar-nav nav-pills justify-content-end">
+            {{#if user}}
+              <li id ="bandroid_navbar"><a href="/users/logout">Logout</a></li>
+            {{else}}
+              <a class="nav-link" href="/users/login">Login</a>
+              <a class="nav-link" href="/users/register">Sign Up</a>
+            {{/if}}
+		    </ul>
+		    
+		  </div>
+		</nav>
+	</div>
+	<!-- End of new additions -->
+	<div class= container-fluid id = "background">
+		<div class="container">
+
+			<div class = "container-fluid">
+				<div class="row">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt-3">
+
+						<h4 id="artist_near"><b>Favorite Artists</b></h4>
+
+						<ul class="list-group" >
+							  <a href="#" class="list-group-item list-group-item-action active">Event1</a>
+							  <a href="#" class="list-group-item list-group-item-action active">Event2</a>
+							  <a href="#" class="list-group-item list-group-item-action active">Event3</a>
+						</ul>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt-3">
+						<h4 id="artist_near"><b>Marked Events</b></h4>
+						<ul class="list-group" >
+							  <a href="#" class="list-group-item list-group-item-action active">Event1</a>
+							  <a href="#" class="list-group-item list-group-item-action active">Event2</a>
+							  <a href="#" class="list-group-item list-group-item-action active">Event3</a>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,7 +1,6 @@
 var express= require('express');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
-var userRoute = require('./routes/user.js');
 var assert = require('assert');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -34,7 +33,6 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use('/',express.static('client')); //setting whatever stuff in client folder as rotue for root directory
-app.use('/user',userRoute);  //route for userPages
 
 app.use(cookieParser());
 

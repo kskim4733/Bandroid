@@ -84,7 +84,7 @@ app.use(function (req, res, next) {
 
 
 // TODO: Also not sure
-app.use('/signup.html', routes);
+app.use('/dashboard', routes);
 app.use('/users', users);
 
 //--------------------------------socket intializing------------------------------------------------------------------------------

@@ -20,11 +20,10 @@ var io = require('socket.io')(server);
 //   socket.emit('news', 'MSG FROM PROF serverTEST ');
 // });
 //-------------------------prof db database intializing------------------------------------------------------------------------------
-// var profdb_url = 'mongodb://localhost:27017/profDB';  //we will have two db one for prof's msg and one for user
-var profdb_url = 'mongodb://kskim4733:kylekim1234@ds127436.mlab.com:27436/bandroid';  //we will have two db one for prof's msg and one for use
-var userdb_url = 'mongodb://localhost:27017/userDB';
+// var database_url = 'mongodb://localhost:27017/profDB';  //we will have two db one for prof's msg and one for user
+var database_url = 'mongodb://kskim4733:kylekim1234@ds127436.mlab.com:27436/bandroid';  //we will have two db one for prof's msg and one for use
 
-MongoClient.connect(profdb_url, function(err, db) {
+MongoClient.connect(database_url, function(err, db) {
 	assert.equal(null, err);
   	console.log("Connected correctly to server");
   	db.createCollection("Messages", function(err, res) {
@@ -37,7 +36,7 @@ MongoClient.connect(profdb_url, function(err, db) {
 //-----------------------setting up route for API Call--------------------------------------------------------------------------------------
 app.get('/api/messages/',function(req,res){
 //-----------------------getting all the previous data from the DB--------------------------------------------------------------------------
-	MongoClient.connect(profdb_url, function(err, db) {
+	MongoClient.connect(database_url, function(err, db) {
   	if (err) throw err;
   		db.collection("Messages").find({},{ _id: false}).toArray(function(err, result) {
     	if (err) throw err;
@@ -66,7 +65,7 @@ app.post('/api/messages/:msg',function(req,res){ //create
 	// res.send('POST: Message '+ req.params.msg);
 	// io.sockets.emit('news', req.params.msg );
 //-----------------------inserting message into database--------------------------------------------------------------------------------------
-	MongoClient.connect(profdb_url, function(err, db) {
+	MongoClient.connect(database_url, function(err, db) {
 		if (err) throw err;
 		var msgobj = { msg: req.params.msg};
 		db.collection("Messages").insertOne(msgobj, function(err, res) {
@@ -96,7 +95,7 @@ app.post('/api/messages/:msg',function(req,res){ //create
 });
 app.delete('/api/messages/:msg',function(req,res){//delete
 //-----------------------inserting message into database--------------------------------------------------------------------------------------
-	MongoClient.connect(profdb_url, function(err, db) {
+	MongoClient.connect(database_url, function(err, db) {
 	  if (err) throw err;
 	  var msgobj = { msg: req.params.msg };
 	  // db.collection("Messages").deleteOne(msgobj, function(err, obj) {

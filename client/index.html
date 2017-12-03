@@ -129,7 +129,7 @@
 <script src="/socket.io.js"></script>
 
 <script>
-  var socket = io.connect('http://localhost:3000');
+  var socket = io.connect('https://bandroid.herokuapp.com');
   socket.on('news', function (data) {
     console.log(data);
    	document.getElementById('profMsg').placeholder = "Status :"+data[0];

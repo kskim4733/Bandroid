@@ -32,7 +32,8 @@ app.set('view engine', 'handlebars');
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use('/',express.static('client')); //setting whatever stuff in client folder as rotue for root directory
+
+
 
 app.use(cookieParser());
 

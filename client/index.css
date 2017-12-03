@@ -191,3 +191,7 @@ max-width: 30%;
   height: 300px;
   overflow-y: auto;
 }
+#profMsg{
+  background-color: white;
+  width: 400px;
+}

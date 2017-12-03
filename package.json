@@ -11,10 +11,21 @@
   "license": "ISC",
   "dependencies": {
     "assert": "^1.4.1",
+    "bcryptjs": "*",
     "body-parser": "^1.18.2",
+    "connect-flash": "*",
+    "cookie-parser": "^1.4.1",
     "express": "^4.16.2",
+    "express-handlebars": "*",
+    "express-messages": "*",
+    "express-session": "*",
+    "express-validator": "*",
     "mongodb": "^2.2.33",
+    "mongoose": "*",
     "morgan": "^1.9.0",
+    "passport": "*",
+    "passport-http": "*",
+    "passport-local": "*",
     "socket.io": "^2.0.4"
   }
 }

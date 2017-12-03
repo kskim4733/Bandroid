@@ -9,7 +9,7 @@ var app = express();
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
-
+app.use(bodyParser.urlencoded({extended: true}));
 app.use('/',express.static('client')); //setting whatever stuff in client folder as rotue for root directory
 app.use('/user',userRoute);  //route for userPages
 //--------------------------------socket intializing------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ app.get('/api/messages/',function(req,res){
 
 });
 
-app.post('/api/messages/:msg',function(req,res){ //create
+app.post('/api/messages/',function(req,res){ //create
 	// io.on('connection', function (socket) {
 	// });
 	// res.send('POST: Message '+ req.params.msg);
@@ -67,7 +67,8 @@ app.post('/api/messages/:msg',function(req,res){ //create
 //-----------------------inserting message into database--------------------------------------------------------------------------------------
 	MongoClient.connect(database_url, function(err, db) {
 		if (err) throw err;
-		var msgobj = { msg: req.params.msg};
+		var value =(req.body.data);
+		var msgobj = { msg: value};
 		db.collection("Messages").insertOne(msgobj, function(err, res) {
 		if (err) throw err;
 			console.log("1 message inserted");
@@ -87,9 +88,7 @@ app.post('/api/messages/:msg',function(req,res){ //create
 			io.sockets.emit('news', return_list );
 	    	db.close();
   		});
-		res.send('POST: '+ req.params.msg);
-
-
+		res.send('POST: '+ value);
 	});
 //------------------------------------------------------------------------------------------------------------------------------------------
 });

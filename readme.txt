@@ -1,7 +1,8 @@
 ==if this is first time running this app please follow following instruction
--install mongodb from the internet
--run the mongodb server by typing mongod (make sure u add mongodb path to system variable PATH)
+-installing mongoDB server to our comptuer is no longer required as we are using mLab
 -go to application folder and run npm install to install all the dependancy
+-then run node main.js
+-go to web browser and type localhost:3000 and see if the site is up
 -now you can test the application by sending bunch of POST GET DELETE API
 -i recommend chrome pluggin called postman. it let u do bunch of request in Graphic interface.
 -do leave feed back

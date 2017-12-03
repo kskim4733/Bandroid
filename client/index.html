@@ -19,11 +19,41 @@
 </head>
 
 <body>
-	<div container = container-fluid id = "background">
+	<!--New addition for A3 -->
+	<div class = "container-fluid">
+		<nav class="navbar fixed-top navbar-dark bg-dark navbar-expand-md">
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+
+		  <div class="collapse navbar-collapse" id="navbarNav">
+		    <ul class="navbar-nav nav nav-pills">
+		      <li class="nav-item active">
+		        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#">My Account</a>
+		      </li>
+		      <form class="form-inline my-2 my-md-0">
+		      <input class="form-control mr-sm-2" id = "profMsg" type="search" placeholder="Status" aria-label="Search">
+		      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Request</button>
+		      </form>
+		    </ul>
+		    <ul class="navbar-nav nav-pills justify-content-end">
+		      <li>
+		        <a class="nav-link" href="#">Login</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="signup.html">Sign Up</a>
+		      </li>
+		    </ul>
+		    
+		  </div>
+		</nav>
+	</div>
+	<!-- End of new additions -->
+	<div class= container-fluid id = "background">
 		<div class="container">
-			<div class="row">
-				<p id="profMsg">Empty</p>
-			</div>
 		<!-- 	bootstrap is using 12 by 12 each row div is gonna shove elemts downward and colum defines how large the elements gonna take the column space out of 12 -->
 			<div class ="d-flex flex-row justify-content-center" id = "banner">
 			<!-- 	<div class="col-lg-3 col-md-3 col-sm-0 col-xs-0">

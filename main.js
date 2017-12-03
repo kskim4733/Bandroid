@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use('/',express.static('client')); //setting whatever stuff in client folder as rotue for root directory
 app.use('/user',userRoute);  //route for userPages
 //--------------------------------socket intializing------------------------------------------------------------------------------
-var server = app.listen(3000);
+var server = app.listen(process.env.PORT || 3000);
 var io = require('socket.io')(server);
 
 // io.on('connection', function (socket) {

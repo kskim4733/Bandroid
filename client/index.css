@@ -71,6 +71,7 @@ max-width: 30%;
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
+  padding-top: 50px;
 }
 
 #banner{
@@ -189,8 +190,4 @@ max-width: 30%;
 #vmenu3{
   height: 300px;
   overflow-y: auto;
-}
-#profMsg{
-  text-align: center;
-  padding: 0px;
 }

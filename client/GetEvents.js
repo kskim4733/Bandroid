@@ -301,6 +301,10 @@ function displayArtist(event_list){
     $("#artistData").append("<ul class = 'list-group list-group-flush' id = 'items'></ul>")
     $("#items").append("<li class = 'list-group-item'>Date: " + event_list[parseInt(artistID.charAt(1))][3] + "</li>")
     $("#items").append("<li class = 'list-group-item'>Time:" + event_list[parseInt(artistID.charAt(1))][4] + "</li>")
+
+    // $("#items").append("<a href = '/favband' id = 'fav-band' class = 'list-group-item'>Add " + artistName + " to Favourites" + "</a>")
+    // $("#items").append("<a href = '/favevent' id = 'fav-event' class = 'list-group-item'>Add Event to Favourites" + "</a>")
+
     $("#artistData").append("<div class = 'card-block' id = 'linkdata'></div>")
     $("#linkdata").append("<a href = '" + link + "' class = 'card-link'> Get tickets here!</a>")
     getArtistInfo(artistName);

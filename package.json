@@ -20,6 +20,7 @@
     "express-messages": "*",
     "express-session": "*",
     "express-validator": "*",
+    "method-override": "^2.3.10",
     "mongodb": "^2.2.33",
     "mongoose": "*",
     "morgan": "^1.9.0",

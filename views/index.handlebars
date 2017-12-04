@@ -7,10 +7,46 @@
 
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 	<script src="/socket.io.js"></script>
-	<style>
+	<script type="text/javascript">
+		var currentUser = {{{username}}};
+		$(function () {
+			$("#info_name")[0].innerText = "Name: " + currentUser.name;
+			$("#info_username")[0].innerText = "Username: " + currentUser.username;
+			$("#info_email")[0].innerText = "Email: " + currentUser.email;
+		})
+		function element_edit(listElementID) { //pass parameter as '#'+'id' For example: '#'+'eventContainer'
+			newName = prompt("Type a new name");
+			if (newName != null && newName != "") {
+				$(listElementID)[0].innerText = newName;
+			}
+		}
+		function element_delete(listElementID) { //pass parameter as '#'+'id' For example: '#'+'eventContainer'
+			newName = prompt("Are you sure? (y/n)");
+			if (newName == "y") {
+				$(listElementID)[0].remove();
+			}
+		}
+		function populateFavArtist(favArtistList){//need seperate name and container name	
+			//this function will take list of favorite artist from the user, itertate through it then populate the favArist list
+			//since the database part is not working you can test it without the parameter
+			//known issue right now is buttons of edit and delete does not work for some reason and CSS is not applied to newly generated artist
+			//so if we can pull up data from database shove it in this function and make buttons and css work, our job in dashboard will be done
+		    var favArtistList = document.getElementById('favArtists')
 
-	</style>
-
+		    $(favArtistList).empty(); //reset list item from the list to prevent list items to keep appending
+		    for (var index_num =0; index_num<favArtist_list.length;x++){//index num will be used to identify each different artists and buttons
+		      $("#favArtists").append("<div id="+"artistContainer"+index_num+">");
+		      $("#favArtists").append("<a id=name"+index_num+ "class='list-group-item list-group-item-action active'>"+"Kyle"+"</a>");
+		      $("#favArtists").append("<a id='nedit' onclick= element_edit('#name'"+index_num+")>Edit</a>");
+		      $("#favArtists").append("<a id='ndelete' onclick= element_delete('#artistContainer'"+index_num+")>Delete</a>");
+		      $("#favArtists").append("{{!-- <button id='nedit'>Edit</button> <button id='ndelete'>Delete</button> --}}");
+		      $("#favArtists").append("</div>");
+		    }					
+		}
+		// jQuery(document).ready(function(){
+		// 	populateFavArtist(2);
+		// });
+	</script>
 </head>
 <body>
 <div class ="d-flex flex-row justify-content-center" id = "banner">
@@ -71,11 +107,12 @@
 						<ul id="favArtists" class="list-group" >
 
 							<div id="artistContainer">
-							  <a href="#" id="name" class="list-group-item list-group-item-action active">Artist1</a>
+							  	<a href="#" id="name" class="list-group-item list-group-item-action active">Artist1</a>
 								<a href="#" id="nedit" onclick="element_edit('#'+'name')">Edit</a>
 								<a href="#" id="ndelete" onclick="element_delete('#'+'artistContainer')">Delete</a>
 								{{!-- <button id="nedit">Edit</button> <button id="ndelete">Delete</button> --}}
 							</div>		
+
 
 						</ul>
 					</div>
@@ -84,7 +121,7 @@
 						<ul class="list-group" >
 
 							<div id="eventContainer">
-							  <a href="#" id="event" class="list-group-item list-group-item-action active">Event1</a>
+							  	<a href="#" id="event" class="list-group-item list-group-item-action active">Event1</a>
 								<a href="#" id="eedit" onclick="element_edit('#'+'event')">Edit</a>
 								<a href="#" id="edelete" onclick="element_delete('#'+'eventContainer')">Delete</a>
 								{{!-- <button id="eedit">Edit</button> <button id="edelete">Delete</button> --}}
@@ -97,42 +134,6 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">
-		var currentUser = {{{username}}};
-		$(function () {
-			$("#info_name")[0].innerText = "Name: " + currentUser.name;
-			$("#info_username")[0].innerText = "Username: " + currentUser.username;
-			$("#info_email")[0].innerText = "Email: " + currentUser.email;
-		})
 
-		function element_edit(listElementID) { //pass parameter as '#'+'id' For example: '#'+'eventContainer'
-			newName = prompt("Type a new name");
-			if (newName != null && newName != "") {
-				console.log("#"+listElementID)
-				$(listElementID)[0].innerText = newName;
-			}
-		}
-
-		function element_delete(listElementID) { //pass parameter as '#'+'id' For example: '#'+'eventContainer'
-			newName = prompt("Are you sure? (y/n)");
-			if (newName == "y") {
-				$(listElementID)[0].remove();
-			}
-		}
-
-
-		function populateFavArtist(favArtist_list){
-		    var vertical_menu = document.getElementById('favArtists')
-		    $(vertical_menu).empty(); //reset list item from the list to prevent list items to keep appending
-		    $("#favArtists").append('<a href="#" class="list-group-item list-group-item-action active">Getting Artists...</a>"');
-		    $(vertical_menu).empty(); //reset list item from the list to prevent list items to keep appending
-		    for (var x =0; x<favArtist_list.length;x++){
-		      $("#favArtists").append("<a href = #artistData class='list-group-item list-group-item-action' id = #" + x + ">"+favArtist_list[x][0]+"</a>");
-		        // console.log(templist[x][0]);
-		    }
-
-		    displayArtist(favArtist_list);
-		}
-	</script>
 </body>
 </html>

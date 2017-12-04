@@ -88,13 +88,12 @@ function getVenue(id){
 }
 
   function populateVerticalList(event_list){
-    console.log("WASSup");
     var vertical_menu = document.getElementById('vmenu')
     $(vertical_menu).empty(); //reset list item from the list to prevent list items to keep appending
     $("#vmenu").append('<a href="#" class="list-group-item list-group-item-action active">Getting Artists...</a>"');
     $(vertical_menu).empty(); //reset list item from the list to prevent list items to keep appending
     for (var x =0; x<event_list.length;x++){
-      $("#vmenu").append("<a href = #artistData class='list-group-item list-group-item-action' id = #" + x + ">"+event_list[x][0]+"</a>");
+      $("#vmenu").append("<a class='list-group-item list-group-item-action' id = #" + x + ">"+event_list[x][0]+"</a>");
         // console.log(templist[x][0]);
     }
 

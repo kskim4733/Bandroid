@@ -6,6 +6,11 @@
 	<link rel="stylesheet" href="/css/style.css" />
 
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="/socket.io.js"></script>
+	<style>
+
+	</style>
+
 </head>
 <body>
 <div class ="d-flex flex-row justify-content-center" id = "banner">
@@ -47,207 +52,86 @@
 
 			<div class = "container-fluid">
 				<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-12">
+
+							<h4 id="artist_near"><b>User Information</b></h4>
+
+							<ul class="list-group" >
+								  <a href="#" id="info_name" class="list-group-item list-group-item-action active">USER_NAME</a>
+								  <a href="#" id="info_username" class="list-group-item list-group-item-action active">USER_ID</a>
+								  <a href="#" id="info_email" class="list-group-item list-group-item-action active">USER_EMAIL</a>
+							</ul>
+						</div>
+					</div>
+				<div class="row">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt-3">
 
 						<h4 id="artist_near"><b>Favorite Artists</b></h4>
 
-						<ul class="list-group" >
-							  <a href="#" id="name1" class="list-group-item list-group-item-action active">Artist1</a>
-								<a href="#" id="edit1" onclick="edit1()">Edit</a>
-								<a href="#" id="delete1" onclick="delete1()">Delete</a>
-								{{!-- <button id="edit1">Edit</button> <button id="delete1">Delete</button> --}}
-							  <a href="#" id="name2" class="list-group-item list-group-item-action active">Artist2</a>
-								<a href="#" id="edit2" onclick="edit2()">Edit</a>
-								<a href="#" id="delete2" onclick="delete2()">Delete</a>
-							  <a href="#" id="name3" class="list-group-item list-group-item-action active">Artist3</a>
-								<a href="#" id="edit3" onclick="edit3()">Edit</a>
-								<a href="#" id="delete3" onclick="delete3()">Delete</a>
+						<ul id="favArtists" class="list-group" >
+
+							<div id="artistContainer">
+							  <a href="#" id="name" class="list-group-item list-group-item-action active">Artist1</a>
+								<a href="#" id="nedit" onclick="element_edit('#'+'name')">Edit</a>
+								<a href="#" id="ndelete" onclick="element_delete('#'+'artistContainer')">Delete</a>
+								{{!-- <button id="nedit">Edit</button> <button id="ndelete">Delete</button> --}}
+							</div>		
+
 						</ul>
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt-3">
 						<h4 id="artist_near"><b>Marked Events</b></h4>
 						<ul class="list-group" >
-							  <a href="#" id="event1" class="list-group-item list-group-item-action active">Event1</a>
-								<a href="#" id="edit4" onclick="edit4()">Edit</a>
-								<a href="#" id="delete4" onclick="delete4()">Delete</a>
-								{{!-- <button id="edit1">Edit</button> <button id="delete1">Delete</button> --}}
-							  <a href="#" id="event2" class="list-group-item list-group-item-action active">Event2</a>
-								<a href="#" id="edit5" onclick="edit5()">Edit</a>
-								<a href="#" id="delete5" onclick="delete5()">Delete</a>
-							  <a href="#" id="event3" class="list-group-item list-group-item-action active">Event3</a>
-								<a href="#" id="edit6" onclick="edit6()">Edit</a>
-								<a href="#" id="delete6" onclick="delete6()">Delete</a>
+
+							<div id="eventContainer">
+							  <a href="#" id="event" class="list-group-item list-group-item-action active">Event1</a>
+								<a href="#" id="eedit" onclick="element_edit('#'+'event')">Edit</a>
+								<a href="#" id="edelete" onclick="element_delete('#'+'eventContainer')">Delete</a>
+								{{!-- <button id="eedit">Edit</button> <button id="edelete">Delete</button> --}}
+							</div>
+
 						</ul>
 					</div>
 				</div>
-			<div class="row">
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt-3">
 
-						<h4 id="artist_near"><b>User Information</b></h4>
-
-						<ul class="list-group" >
-							  <a href="#" id="name" class="list-group-item list-group-item-action active">Artist1</a>
-							  <a href="#" id="username" class="list-group-item list-group-item-action active">Artist2</a>
-							  <a href="#" id="email" class="list-group-item list-group-item-action active">Artist3</a>
-						</ul>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
 		var currentUser = {{{username}}};
-		console.log(currentUser);
-
-		// user_info contains all the info we need
-		// defined in users.js:91
-		// user_info.name
-		// user_info.email
-		// user_info.username
-		//var email = "ello";
-		//$("#hello1")[0].innerText = email;
-
-		//
 		$(function () {
-			$("#name")[0].innerText = "Name: " + currentUser.name;
-			$("#username")[0].innerText = "Username: " + currentUser.username;
-			$("#email")[0].innerText = "Email: " + currentUser.email;
+			$("#info_name")[0].innerText = "Name: " + currentUser.name;
+			$("#info_username")[0].innerText = "Username: " + currentUser.username;
+			$("#info_email")[0].innerText = "Email: " + currentUser.email;
 		})
 
-		function edit1() {
+		function element_edit(listElementID) { //pass parameter as '#'+'id' For example: '#'+'eventContainer'
 			newName = prompt("Type a new name");
 			if (newName != null && newName != "") {
-				// TODO: Uncomment this once user_info can be accessed and comment below
-				currentUser.name = newName;
-				$("#name1")[0].innerText = currentUser.name;
-				//$("#name")[0].innerText = newName;
+				console.log("#"+listElementID)
+				$(listElementID)[0].innerText = newName;
 			}
 		}
 
-		function delete1() {
-			newName = prompt("Are you sure? (yes/no)");
-			if (newName == "yes") {
-				$("#name1")[0].remove();
-				//$("#name")[0].remove();
-				//$("#name")[0].remove();
-				$("#edit1")[0].remove();
-				$("#delete1")[0].remove();
-			}
-		}
-
-		function edit2() {
-			newUser = prompt("Type a new username");
-			if (newUser != null && newUser != "") {
-				// TODO: Uncomment this once user_info can be accessed and comment below
-				// user_info.username = newUser;
-				// $("#username")[0].innerText = user_info.username;
-				currentUser.username = newUser;
-				$("#name2")[0].innerText = currentUser.username;
-				//$("#username")[0].innerText = newUser;
-			}
-		}
-
-		function delete2() {
-			newUser = prompt("Are you sure? (yes/no)");
-			if (newUser == "yes") {
-				$("#name2")[0].remove();
-				//$("#username")[0].remove();
-				//$("#username")[0].remove();
-				$("#edit2")[0].remove();
-				$("#delete2")[0].remove();
-			}
-		}
-
-		function edit3() {
-			newEmail = prompt("Type a new email");
-			if (newEmail != null && newEmail != "") {
-				// TODO: Uncomment this once user_info can be accessed and comment below
-				// user_info.email = newEmail;
-				// $("#email")[0].innerText = user_info.email;
-				currentUser.email = newEmail;
-				$("#name3")[0].innerText = currentUser.email;
-				//$("#email")[0].innerText = newEmail;
-			}
-		}
-
-		function delete3() {
-			newEmail = prompt("Are you sure? (yes/no)");
-			if (newEmail == "yes") {
-				$("#name3")[0].remove();
-				//$("#email")[0].remove();
-				//$("#email")[0].remove();
-				$("#edit3")[0].remove();
-				$("#delete3")[0].remove();
+		function element_delete(listElementID) { //pass parameter as '#'+'id' For example: '#'+'eventContainer'
+			newName = prompt("Are you sure? (y/n)");
+			if (newName == "y") {
+				$(listElementID)[0].remove();
 			}
 		}
 
 
-		// Events
-		function edit4() {
-			newName = prompt("Type a new name");
-			if (newName != null && newName != "") {
-				// TODO: Uncomment this once user_info can be accessed and comment below
-				currentUser.name = newName;
-				$("#event1")[0].innerText = currentUser.name;
-				//$("#name")[0].innerText = newName;
-			}
-		}
+		function populateFavArtist(favArtist_list){
+		    var vertical_menu = document.getElementById('favArtists')
+		    $(vertical_menu).empty(); //reset list item from the list to prevent list items to keep appending
+		    $("#favArtists").append('<a href="#" class="list-group-item list-group-item-action active">Getting Artists...</a>"');
+		    $(vertical_menu).empty(); //reset list item from the list to prevent list items to keep appending
+		    for (var x =0; x<favArtist_list.length;x++){
+		      $("#favArtists").append("<a href = #artistData class='list-group-item list-group-item-action' id = #" + x + ">"+favArtist_list[x][0]+"</a>");
+		        // console.log(templist[x][0]);
+		    }
 
-		function delete4() {
-			newName = prompt("Are you sure? (yes/no)");
-			if (newName == "yes") {
-				$("#event1")[0].remove();
-				//$("#name")[0].remove();
-				//$("#name")[0].remove();
-				$("#edit4")[0].remove();
-				$("#delete4")[0].remove();
-			}
-		}
-
-		function edit5() {
-			newUser = prompt("Type a new username");
-			if (newUser != null && newUser != "") {
-				// TODO: Uncomment this once user_info can be accessed and comment below
-				// user_info.username = newUser;
-				// $("#username")[0].innerText = user_info.username;
-				currentUser.username = newUser;
-				$("#event2")[0].innerText = currentUser.username;
-				//$("#username")[0].innerText = newUser;
-			}
-		}
-
-		function delete5() {
-			newUser = prompt("Are you sure? (yes/no)");
-			if (newUser == "yes") {
-				$("#event2")[0].remove();
-				//$("#username")[0].remove();
-				//$("#username")[0].remove();
-				$("#edit5")[0].remove();
-				$("#delete5")[0].remove();
-			}
-		}
-
-		function edit6() {
-			newEmail = prompt("Type a new email");
-			if (newEmail != null && newEmail != "") {
-				// TODO: Uncomment this once user_info can be accessed and comment below
-				// user_info.email = newEmail;
-				// $("#email")[0].innerText = user_info.email;
-				currentUser.email = newEmail;
-				$("#event3")[0].innerText = currentUser.email;
-				//$("#email")[0].innerText = newEmail;
-			}
-		}
-
-		function delete6() {
-			newEmail = prompt("Are you sure? (yes/no)");
-			if (newEmail == "yes") {
-				$("#event3")[0].remove();
-				//$("#email")[0].remove();
-				//$("#email")[0].remove();
-				$("#edit6")[0].remove();
-				$("#delete6")[0].remove();
-			}
+		    displayArtist(favArtist_list);
 		}
 	</script>
 </body>
